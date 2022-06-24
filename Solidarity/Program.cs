@@ -1,46 +1,47 @@
-﻿namespace Server;
-
-public class Program
+﻿namespace Solidarity
 {
-    private readonly DiscordSocketClient _client;
-
-    private readonly DiscordSocketConfig _config = new()
+    public class Program
     {
-        AlwaysDownloadUsers = true,
-        GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.GuildMembers,
-        LogLevel = LogSeverity.Info,
-    };
+        private readonly DiscordSocketClient _client;
 
-    public Program()
-    {
-        _client = new(_config);
+        private readonly DiscordSocketConfig _config = new()
+        {
+            AlwaysDownloadUsers = true,
+            GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.GuildMembers,
+            LogLevel = LogSeverity.Info,
+        };
 
-        _client.Log += Log;
-        _client.Ready += Ready;
+        public Program()
+        {
+            _client = new(_config);
 
-        _ = new SocketOperator(_client);
-    }
+            _client.Log += Log;
+            _client.Ready += Ready;
 
-    static void Main(string[] args)
-        => new Program()
-            .RunAsync()
-            .GetAwaiter()
-            .GetResult();
+            _ = new SocketOperator(_client);
+        }
 
-    public async Task RunAsync()
-    {
-        await _client.LoginAsync(TokenType.Bot, Config.Settings.Token);
+        static void Main(string[] args)
+            => new Program()
+                .RunAsync()
+                .GetAwaiter()
+                .GetResult();
 
-        await _client.StartAsync();
-        await Task.Delay(Timeout.Infinite);
-    }
+        public async Task RunAsync()
+        {
+            await _client.LoginAsync(TokenType.Bot, Config.Settings.Token);
 
-    private async Task Ready()
-        => await _client.SetGameAsync("the Barriot server", null, ActivityType.Watching);
+            await _client.StartAsync();
+            await Task.Delay(Timeout.Infinite);
+        }
 
-    private async Task Log(LogMessage args)
-    {
-        Console.WriteLine(args);
-        await Task.CompletedTask;
+        private async Task Ready()
+            => await _client.SetGameAsync("the Barriot server", null, ActivityType.Watching);
+
+        private async Task Log(LogMessage args)
+        {
+            Console.WriteLine(args);
+            await Task.CompletedTask;
+        }
     }
 }

@@ -1,34 +1,35 @@
 ﻿using Newtonsoft.Json;
 
-namespace Server;
-
-public class Config
+namespace Solidarity
 {
-    public static Settings Settings { get; private set; }
-        = Settings.Read();
-}
-
-public class Settings
-{
-    public string Token { get; set; } = "";
-
-    public ulong VoteChannel { get; set; }
-
-    public ulong VoteRole { get; set; }
-
-    public string[] Emotes { get; set; } = Array.Empty<string>();
-
-    public Dictionary<ulong, string[]> ChannelHandleCallback { get; set; } = new();
-
-    public static Settings Read()
+    public class Config
     {
-        string path = "Config.json";
-        if (!File.Exists(path))
+        public static Settings Settings { get; private set; }
+            = Settings.Read();
+    }
+
+    public class Settings
+    {
+        public string Token { get; set; } = "";
+
+        public ulong VoteChannel { get; set; }
+
+        public ulong VoteRole { get; set; }
+
+        public string[] Emotes { get; set; } = Array.Empty<string>();
+
+        public Dictionary<ulong, string[]> ChannelHandleCallback { get; set; } = new();
+
+        public static Settings Read()
         {
-            File.WriteAllText(path, JsonConvert.SerializeObject(new Settings(), Formatting.Indented));
-            return new Settings();
+            string path = "Config.json";
+            if (!File.Exists(path))
+            {
+                File.WriteAllText(path, JsonConvert.SerializeObject(new Settings(), Formatting.Indented));
+                return new Settings();
+            }
+            return JsonConvert.DeserializeObject<Settings>(File.ReadAllText(path))
+                ?? throw new NullReferenceException();
         }
-        return JsonConvert.DeserializeObject<Settings>(File.ReadAllText(path))
-            ?? throw new NullReferenceException();
     }
 }

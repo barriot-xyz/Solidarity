@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Solidarity
 {
     internal static class Cacheable
     {
