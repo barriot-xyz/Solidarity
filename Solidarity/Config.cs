@@ -10,14 +10,29 @@ namespace Solidarity
 
     public class Settings
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Token { get; set; } = "";
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ulong VoteChannel { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ulong VoteRole { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string[] Emotes { get; set; } = Array.Empty<string>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Dictionary<ulong, string[]> ChannelHandleCallback { get; set; } = new();
 
         public static Settings Read()
