@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Solidarity.Interactions.Modals
+﻿namespace Solidarity.Interactions.Modals
 {
     public class MessageModal : IModal
     {

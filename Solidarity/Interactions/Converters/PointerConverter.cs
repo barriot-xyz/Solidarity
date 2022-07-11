@@ -1,17 +1,15 @@
 ﻿using Solidarity.Interactions.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solidarity.Interactions.Converters
 {
-    public class PointerConverter : ComponentTypeConverter<Pointer>
+    public class PointerConverter : TypeConverter<Pointer>
     {
-        public override Task<TypeConverterResult> ReadAsync(IInteractionContext context, IComponentInteractionData option, IServiceProvider services)
+        public override ApplicationCommandOptionType GetDiscordType()
+            => ApplicationCommandOptionType.String;
+
+        public override Task<TypeConverterResult> ReadAsync(IInteractionContext context, IApplicationCommandInteractionDataOption option, IServiceProvider services)
         {
-            if (Guid.TryParse(option.Value, out Guid id))
+            if (Guid.TryParse((string)option.Value, out Guid id))
                 if (Pointer.TryParse(id, out var value))
                     return Task.FromResult(TypeConverterResult.FromSuccess(value));
             return Task.FromResult(TypeConverterResult.FromError(InteractionCommandError.ConvertFailed, "Failed to convert from guid."));

@@ -1,4 +1,7 @@
-﻿namespace Solidarity
+﻿using Solidarity.Interactions.Converters;
+using Solidarity.Interactions.Types;
+
+namespace Solidarity
 {
     public class AssemblyOperator
     {
@@ -33,6 +36,10 @@
 
             _timer.Elapsed += OnElapsed!;
             _timer.Start();
+
+            _service.AddTypeConverter<Pointer>(new PointerConverter());
+            _service.AddTypeReader<Pointer>(new PointerReader());
+            _service.AddComponentTypeConverter<Pointer>(new ComponentPointerConverter());
 
             await _service.AddModulesAsync(typeof(Program).Assembly, _provider);
         }
@@ -114,7 +121,7 @@
         }
 
         private async Task Ready()
-        { 
+        {
             await _client.SetGameAsync("the Barriot server", null, ActivityType.Watching);
 
             if (Config.Settings.RegisterCommands)

@@ -23,7 +23,7 @@ namespace Solidarity
 
         public Program()
         {
-            _provider = ConfigureServices(); 
+            _provider = ConfigureServices();
             _client = _provider.GetRequiredService<DiscordSocketClient>();
         }
 

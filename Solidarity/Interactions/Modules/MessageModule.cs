@@ -1,14 +1,9 @@
 ﻿using Solidarity.Interactions.Modals;
 using Solidarity.Interactions.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solidarity.Interactions.Modules
 {
-    public class MessageModule : ModuleBase 
+    public class MessageModule : ModuleBase
     {
         [SlashCommand("write", "Create a message in this channel")]
         public async Task SendMessageAsync()
