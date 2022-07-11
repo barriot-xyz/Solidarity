@@ -26,8 +26,8 @@ namespace Solidarity.Interactions.Modules
         }
 
         [ModalInteraction("modify:*")]
-        public async Task ResolveMessageAsync(Pointer message, MessageModal modal)
-            => await ResolveMessageInternalAsync(modal.Content, message.GetValue<SocketUserMessage>());
+        public async Task ResolveMessageAsync(Pointer<SocketUserMessage> message, MessageModal modal)
+            => await ResolveMessageInternalAsync(modal.Content, message.Value);
 
         private async Task ResolveMessageInternalAsync(string? content, SocketUserMessage? message = null)
         {
