@@ -9,11 +9,15 @@
 
   <ItemGroup>
 	<PackageReference Include="Discord.Net.Interactions" Version="3.7.2" />
+	  
+	  >
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
 	<Using Include="Discord" />
 	<Using Include="Discord.WebSocket" />
+	<Using Include="Discord.Interactions" />
   </ItemGroup>
 
 </Project>

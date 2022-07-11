@@ -11,27 +11,32 @@ namespace Solidarity
     public class Settings
     {
         /// <summary>
-        /// 
+        ///     The application token.
         /// </summary>
         public string Token { get; set; } = "";
 
         /// <summary>
-        /// 
+        ///     To register commands to Discord or not.
+        /// </summary>
+        public bool RegisterCommands { get; set; }
+
+        /// <summary>
+        ///     The channel to send vote reminders to.
         /// </summary>
         public ulong VoteChannel { get; set; }
 
         /// <summary>
-        /// 
+        ///     The role to ping for vote reminders.
         /// </summary>
         public ulong VoteRole { get; set; }
 
         /// <summary>
-        /// 
+        ///     Emotes to automatically add on callbacks under the term 'reaction'
         /// </summary>
         public string[] Emotes { get; set; } = Array.Empty<string>();
 
         /// <summary>
-        /// 
+        ///     A collection of channels that are defined under terms.
         /// </summary>
         public Dictionary<ulong, string[]> ChannelHandleCallback { get; set; } = new();
 
