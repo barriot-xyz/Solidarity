@@ -2,7 +2,7 @@
 
 namespace Solidarity.Interactions.Converters
 {
-    internal class PointerReader<T> : TypeReader<T>
+    internal class PointerReader<T> : TypeReader<T> where T : IPointer
     {
         public override Task<TypeConverterResult> ReadAsync(IInteractionContext context, string option, IServiceProvider services)
         {
