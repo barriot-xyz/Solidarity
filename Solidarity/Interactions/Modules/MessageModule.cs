@@ -1,5 +1,6 @@
 ﻿using Solidarity.Interactions.Modals;
-using Solidarity.Interactions.Types;
+using Transference.Discord;
+using Transference;
 
 namespace Solidarity.Interactions.Modules
 {
@@ -22,7 +23,7 @@ namespace Solidarity.Interactions.Modules
                     ephemeral: true);
 
             else
-                await RespondWithModalAsync<MessageModal>($"modify:{Pointer.Create(message)}");
+                await RespondWithModalAsync<MessageModal>($"modify:{UlongPointer.Create(message)}");
         }
 
         [ModalInteraction("modify:*")]

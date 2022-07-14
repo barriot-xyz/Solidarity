@@ -1,5 +1,5 @@
-﻿using Solidarity.Interactions.Converters;
-using Solidarity.Interactions.Types;
+﻿using Transference.Discord;
+using Transference;
 
 namespace Solidarity
 {
@@ -37,7 +37,7 @@ namespace Solidarity
             _timer.Elapsed += OnElapsed!;
             _timer.Start();
 
-            _service.AddGenericTypeReader(typeof(Pointer<>), typeof(PointerReader<>));
+            _service.AddGenericTypeReader(typeof(Pointer<>), typeof(UlongPointerReader<>));
 
             await _service.AddModulesAsync(typeof(Program).Assembly, _provider);
         }

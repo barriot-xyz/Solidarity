@@ -13,6 +13,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Tranference.Discord">
+      <HintPath>..\..\Transference\Tranference.Discord\bin\Debug\net6.0\Tranference.Discord.dll</HintPath>
+    </Reference>
+    <Reference Include="Transference">
+      <HintPath>..\..\Transference\Tranference.Discord\bin\Debug\net6.0\Transference.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
 	  <Using Include="Discord" />
 	  <Using Include="Discord.WebSocket" />
 	  <Using Include="Discord.Interactions" />
