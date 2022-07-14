@@ -1,5 +1,6 @@
 ﻿using Solidarity.Interactions.Modals;
-using Solidarity.Interactions.Types;
+using Tranference.Discord;
+using Transference;
 
 namespace Solidarity.Interactions.Modules
 {
@@ -16,7 +17,7 @@ namespace Solidarity.Interactions.Modules
                     ephemeral: true);
 
             else
-                await RespondWithModalAsync<RoleModal>($"role-add:{Pointer.Create(message)}");
+                await RespondWithModalAsync<RoleModal>($"role-add:{UlongPointer.Create(message)}");
         }
 
         [ModalInteraction("role-add:*")]
