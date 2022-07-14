@@ -1,5 +1,6 @@
 ﻿using Solidarity.Interactions.Modals;
-using Solidarity.Interactions.Types;
+using Transference.Discord;
+using Transference;
 
 namespace Solidarity.Interactions.Modules
 {
@@ -22,12 +23,12 @@ namespace Solidarity.Interactions.Modules
                     ephemeral: true);
 
             else
-                await RespondWithModalAsync<MessageModal>($"modify:{Pointer.Create(message)}");
+                await RespondWithModalAsync<MessageModal>($"modify:{UlongPointer.Create(message)}");
         }
 
         [ModalInteraction("modify:*")]
-        public async Task ResolveMessageAsync(Pointer message, MessageModal modal)
-            => await ResolveMessageInternalAsync(modal.Content, message.GetValue<SocketUserMessage>());
+        public async Task ResolveMessageAsync(Pointer<SocketUserMessage> message, MessageModal modal)
+            => await ResolveMessageInternalAsync(modal.Content, message.Value);
 
         private async Task ResolveMessageInternalAsync(string? content, SocketUserMessage? message = null)
         {

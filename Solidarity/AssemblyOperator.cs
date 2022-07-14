@@ -1,5 +1,5 @@
-﻿using Solidarity.Interactions.Converters;
-using Solidarity.Interactions.Types;
+﻿using Transference.Discord;
+using Transference;
 
 namespace Solidarity
 {
@@ -37,9 +37,7 @@ namespace Solidarity
             _timer.Elapsed += OnElapsed!;
             _timer.Start();
 
-            _service.AddTypeConverter<Pointer>(new PointerConverter());
-            _service.AddTypeReader<Pointer>(new PointerReader());
-            _service.AddComponentTypeConverter<Pointer>(new ComponentPointerConverter());
+            _service.AddGenericTypeReader(typeof(Pointer<>), typeof(UlongPointerReader<>));
 
             await _service.AddModulesAsync(typeof(Program).Assembly, _provider);
         }
@@ -57,38 +55,6 @@ namespace Solidarity
             var ctx = new SocketInteractionContext(_client, arg);
 
             await _service.ExecuteCommandAsync(ctx, _provider);
-
-            //var cb = new ComponentBuilder()
-            //    .WithButton("Stop being reminded", "novote", ButtonStyle.Danger);
-
-            //if (arg.User is not SocketGuildUser user)
-            //    return;
-
-            //var role = user.Guild.GetRole(Config.Settings.VoteRole);
-
-            //switch (arg.Data.CustomId)
-            //{
-            //    case "vote":
-            //        if (role != null && !user.Roles.Any(x => x == role))
-            //        {
-            //            await user.AddRoleAsync(role);
-            //            await arg.RespondAsync(
-            //                text: ":heart: **You will be reminded to vote every 12 hours!**",
-            //                components: cb.Build(),
-            //                ephemeral: true);
-            //        }
-            //        else
-            //            await arg.RespondAsync(text: ":heart: **You are already being reminded to vote!**",
-            //                components: cb.Build(),
-            //                ephemeral: true);
-            //        break;
-            //    case "novote":
-            //        await user.RemoveRoleAsync(role);
-            //        await arg.RespondAsync(
-            //            text: ":broken_heart: **Okay, I will stop reminding you to vote.** Thank you for contributing!",
-            //            ephemeral: true);
-            //        break;
-            //}
         }
 
         private async Task MessageReceived(SocketMessage args)

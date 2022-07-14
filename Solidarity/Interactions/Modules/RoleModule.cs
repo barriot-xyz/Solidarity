@@ -1,5 +1,6 @@
 ﻿using Solidarity.Interactions.Modals;
-using Solidarity.Interactions.Types;
+using Transference.Discord;
+using Transference;
 
 namespace Solidarity.Interactions.Modules
 {
@@ -16,11 +17,11 @@ namespace Solidarity.Interactions.Modules
                     ephemeral: true);
 
             else
-                await RespondWithModalAsync<RoleModal>($"role-add:{Pointer.Create(message)}");
+                await RespondWithModalAsync<RoleModal>($"role-add:{UlongPointer.Create(message)}");
         }
 
         [ModalInteraction("role-add:*")]
-        public async Task AddResolveAsync(Pointer message, RoleModal modal)
+        public async Task AddResolveAsync(Pointer<SocketUserMessage> message, RoleModal modal)
         {
             SocketRole? role = null;
 
@@ -37,10 +38,10 @@ namespace Solidarity.Interactions.Modules
 
             else
             {
-                var cb = ComponentBuilder.FromMessage(message.GetValue<SocketUserMessage>())
+                var cb = ComponentBuilder.FromMessage(message.Value)
                     .WithButton(role.Name, $"role-resolve:{role.Id}", ButtonStyle.Secondary);
 
-                await message.GetValue<SocketUserMessage>().ModifyAsync(x =>
+                await message.Value.ModifyAsync(x =>
                 {
                     x.Components = cb.Build();
                 });
