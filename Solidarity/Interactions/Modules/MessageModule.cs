@@ -1,5 +1,5 @@
 ﻿using Solidarity.Interactions.Modals;
-using Tranference.Discord;
+using Transference.Discord;
 using Transference;
 
 namespace Solidarity.Interactions.Modules

@@ -1,4 +1,4 @@
-﻿using Tranference.Discord;
+﻿using Transference.Discord;
 using Transference;
 
 namespace Solidarity
